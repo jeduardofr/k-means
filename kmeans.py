@@ -36,6 +36,7 @@ class KMeans():
         self._min_attributes = [i for i in data.min()]
 
     def pick_random_centroids(self):
+        self._centroids = []
         for _ in range(self._n_clusters):
             points = [
                 uniform(self._min_attributes[i], self._max_attributes[i]) for i in range(self._n_attributes)

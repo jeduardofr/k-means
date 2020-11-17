@@ -70,7 +70,7 @@ class KMeans():
 
             self.snapshots.append({
                 "data": self.data.copy(),
-                "iterations": iterations,
+                "iterations": iterations - 1 if iterations > self._n_iterations else iterations,
                 "error": total_error
             })
 

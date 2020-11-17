@@ -42,12 +42,10 @@ class KMeans():
             ]
             self._centroids.append(Node(points))
 
-    def execute(self):
-        self.pick_random_centroids()
-        self.solve()
-
     def solve(self):
         for i in range(self._n_rounds):
+            self.pick_random_centroids()
+
             iterations = 0
             has_change = True
 
@@ -82,6 +80,8 @@ class KMeans():
                 avg[1] = avg[1] / total
                 avg[2] = avg[2] / total
                 avg[3] = avg[3] / total
+            else:
+                total = 1
 
             if (self._centroids[i].points[0] != avg[0] or self._centroids[i].points[1] != avg[1] or
                 self._centroids[i].points[2] != avg[2] or self._centroids[i].points[3] != avg[3]):

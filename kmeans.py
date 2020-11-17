@@ -58,7 +58,7 @@ class KMeans():
                 for node in self.data:
                     node.choose_closest(self._centroids)
 
-                has_change = not self.reubicate_centroids()
+                has_change = self.reubicate_centroids()
 
             total_error = 0
             for i in range(self._n_clusters):

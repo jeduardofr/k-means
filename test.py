@@ -12,5 +12,6 @@ for s in k.snapshots:
     print("# Iteraciones: {}".format(s['iterations']))
     nodes = s['data']
     for index in range(len(nodes)):
-        print("Clase {} => Agrupación {}".format(data["class"][index], nodes[index].centroid_id))
+        pass
+        # print("Clase {} => Agrupación {}".format(data["class"][index], nodes[index].centroid_id))
     print("==========")

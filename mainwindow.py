@@ -4,6 +4,8 @@ from ui_mainwindow import Ui_MainWindow
 import pandas as pd
 from kmeans import KMeans
 
+def format_number(number):
+    return "{:.6f}".format(number)
 
 class MainWindow(QMainWindow):
 
@@ -48,7 +50,7 @@ class MainWindow(QMainWindow):
         for s in k.snapshots:
             self.ui.tablaGenerales.setItem(row, 0, QTableWidgetItem(str(row+1)))
             self.ui.tablaGenerales.setItem(row, 1, QTableWidgetItem(str(s["iterations"])))
-            self.ui.tablaGenerales.setItem(row, 2, QTableWidgetItem(str(s["error"])))
+            self.ui.tablaGenerales.setItem(row, 2, QTableWidgetItem(format_number(s["error"])))
             row += 1
 
 
@@ -65,15 +67,15 @@ class MainWindow(QMainWindow):
             if k.snapshots[i]["error"] < min:
                 min, index = k.snapshots[i]["error"], i
 
-        self.ui.error.setText(str(k.snapshots[index]['error']))
+        self.ui.error.setText(format_number(k.snapshots[index]['error']))
 
         nodes = k.snapshots[index]['data']
         row = 0
         for i in range(len(nodes)):
-            self.ui.tablaResultados.setItem(row, 0, QTableWidgetItem(str(nodes[i].points[0])))
-            self.ui.tablaResultados.setItem(row, 1, QTableWidgetItem(str(nodes[i].points[1])))
-            self.ui.tablaResultados.setItem(row, 2, QTableWidgetItem(str(nodes[i].points[2])))
-            self.ui.tablaResultados.setItem(row, 3, QTableWidgetItem(str(nodes[i].points[3])))
+            self.ui.tablaResultados.setItem(row, 0, QTableWidgetItem(format_number(nodes[i].points[0])))
+            self.ui.tablaResultados.setItem(row, 1, QTableWidgetItem(format_number(nodes[i].points[1])))
+            self.ui.tablaResultados.setItem(row, 2, QTableWidgetItem(format_number(nodes[i].points[2])))
+            self.ui.tablaResultados.setItem(row, 3, QTableWidgetItem(format_number(nodes[i].points[3])))
             self.ui.tablaResultados.setItem(row, 4, QTableWidgetItem(self.data["class"][i]))
             self.ui.tablaResultados.setItem(row, 5, QTableWidgetItem("C{}".format(nodes[i].centroid_id)))
             row += 1

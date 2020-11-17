@@ -45,9 +45,24 @@ class Ui_MainWindow(object):
         self.botonAlgoritmo = QtWidgets.QPushButton(self.centralwidget)
         self.botonAlgoritmo.setGeometry(QtCore.QRect(330, 480, 101, 23))
         self.botonAlgoritmo.setObjectName("botonAlgoritmo")
+
+        self.etiquetaResultados = QtWidgets.QLabel(self.centralwidget)
+        self.etiquetaResultados.setGeometry(QtCore.QRect(30, 100, 101, 16))
+        self.etiquetaResultados.setObjectName("etiquetaResultados")
+
+        self.tablaGenerales = QtWidgets.QTableWidget(self.centralwidget)
+        self.tablaGenerales.setGeometry(QtCore.QRect(30, 120, 711, 111))
+        self.tablaGenerales.setObjectName("tableGenerales")
+        self.tablaGenerales.setColumnCount(0)
+        self.tablaGenerales.setRowCount(0)
+
+        self.etiquetaMejor = QtWidgets.QLabel(self.centralwidget)
+        self.etiquetaMejor.setGeometry(QtCore.QRect(30, 240, 101, 16))
+        self.etiquetaMejor.setObjectName("etiquetaMejor")
+
         self.tablaResultados = QtWidgets.QTableWidget(self.centralwidget)
-        self.tablaResultados.setGeometry(QtCore.QRect(30, 120, 711, 331))
-        self.tablaResultados.setObjectName("tablaResultados")
+        self.tablaResultados.setGeometry(QtCore.QRect(30, 260, 711, 201))
+        self.tablaResultados.setObjectName("tableResultados")
         self.tablaResultados.setColumnCount(0)
         self.tablaResultados.setRowCount(0)
         MainWindow.setCentralWidget(self.centralwidget)

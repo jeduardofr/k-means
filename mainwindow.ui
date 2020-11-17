@@ -122,14 +122,50 @@
      <string>Ejecutar algoritmo</string>
     </property>
    </widget>
-   <widget class="QTableWidget" name="tablaResultados">
+   <widget class="QTableWidget" name="tableGenerales">
     <property name="geometry">
      <rect>
       <x>30</x>
       <y>120</y>
       <width>711</width>
-      <height>331</height>
+      <height>111</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="tableResultados">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>260</y>
+      <width>711</width>
+      <height>201</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="etiquetaMejor">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>240</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Mejor CLuster</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="etiquetaResultados">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>100</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Resultados Generales</string>
     </property>
    </widget>
   </widget>

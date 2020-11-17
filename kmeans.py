@@ -1,6 +1,7 @@
 from random import seed, uniform
 from node import Node
 
+
 class KMeans():
     def __init__(self, clusters, rounds, iterations):
         self._n_clusters = clusters
@@ -44,6 +45,8 @@ class KMeans():
             self._centroids.append(Node(points))
 
     def solve(self):
+        filter_by_id = lambda id, nodes: [node for node in nodes if node.centroid_id == id]
+
         for i in range(self._n_rounds):
             self.pick_random_centroids()
 
@@ -57,19 +60,28 @@ class KMeans():
 
                 has_change = not self.reubicate_centroids()
 
+            total_error = 0
+            for i in range(self._n_clusters):
+                nodes = filter_by_id(i, self.data)
+                cluster_error = 0
+                for node in nodes:
+                    cluster_error += node.distance_to(self._centroids[i])
+                total_error += cluster_error
+
             self.snapshots.append({
                 "data": self.data.copy(),
-                "iterations": iterations
+                "iterations": iterations,
+                "error": total_error
             })
 
     def reubicate_centroids(self):
-        filter_by_id = lambda id, nodes : [node for node in nodes if node.centroid_id == id]
+        filter_by_id = lambda id, nodes: [node for node in nodes if node.centroid_id == id]
         changed = False
 
         for i in range(self._n_clusters):
             nodes = filter_by_id(i, self.data)
             total = len(nodes)
-            avg = [0,0,0,0]
+            avg = [0, 0, 0, 0]
             for node in nodes:
                 avg[0] += node.points[0]
                 avg[1] += node.points[1]
@@ -85,7 +97,7 @@ class KMeans():
                 total = 1
 
             if (self._centroids[i].points[0] != avg[0] or self._centroids[i].points[1] != avg[1] or
-                self._centroids[i].points[2] != avg[2] or self._centroids[i].points[3] != avg[3]):
+                    self._centroids[i].points[2] != avg[2] or self._centroids[i].points[3] != avg[3]):
                 changed = True
 
             self._centroids[i].points = avg

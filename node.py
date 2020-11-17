@@ -6,7 +6,7 @@ class Node():
         self.centroid_id  = centroid_id
 
     def distance_to(self, node):
-        return sqrt(
+        return (
             (self.points[0] - node.points[0])**2 +
             (self.points[1] - node.points[1])**2 +
             (self.points[2] - node.points[2])**2 +

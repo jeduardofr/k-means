@@ -48,7 +48,7 @@ class MainWindow(QMainWindow):
         for s in k.snapshots:
             self.ui.tablaGenerales.setItem(row, 0, QTableWidgetItem(str(row+1)))
             self.ui.tablaGenerales.setItem(row, 1, QTableWidgetItem(str(s["iterations"])))
-            self.ui.tablaGenerales.setItem(row, 2, QTableWidgetItem("Missing"))
+            self.ui.tablaGenerales.setItem(row, 2, QTableWidgetItem(str(s["error"])))
             row += 1
 
 
@@ -59,18 +59,21 @@ class MainWindow(QMainWindow):
         self.ui.tablaResultados.setHorizontalHeaderLabels(columns)
         self.ui.tablaResultados.setRowCount(len(self.data))
 
-        for s in k.snapshots:
-            row = 0
-            nodes = s['data']
-            for index in range(len(nodes)):
-                self.ui.tablaResultados.setItem(row, 0, QTableWidgetItem(str(nodes[index].points[0])))
-                self.ui.tablaResultados.setItem(row, 1, QTableWidgetItem(str(nodes[index].points[1])))
-                self.ui.tablaResultados.setItem(row, 2, QTableWidgetItem(str(nodes[index].points[2])))
-                self.ui.tablaResultados.setItem(row, 3, QTableWidgetItem(str(nodes[index].points[3])))
-                self.ui.tablaResultados.setItem(row, 4, QTableWidgetItem(self.data["class"][index]))
-                self.ui.tablaResultados.setItem(row, 5, QTableWidgetItem("C{}".format(nodes[index].centroid_id)))
-                row += 1
+        # Get the snapshot with the lowest error
+        min, index = k.snapshots[0]["error"], 0
+        for i in range(1, len(k.snapshots)):
+            if k.snapshots[i]["error"] < min:
+                min, index = k.snapshots[i]["error"], i
 
-            break
+        self.ui.error.setText(str(k.snapshots[index]['error']))
 
-        # k.snapshots contiene todos los resultados
+        nodes = k.snapshots[index]['data']
+        row = 0
+        for i in range(len(nodes)):
+            self.ui.tablaResultados.setItem(row, 0, QTableWidgetItem(str(nodes[i].points[0])))
+            self.ui.tablaResultados.setItem(row, 1, QTableWidgetItem(str(nodes[i].points[1])))
+            self.ui.tablaResultados.setItem(row, 2, QTableWidgetItem(str(nodes[i].points[2])))
+            self.ui.tablaResultados.setItem(row, 3, QTableWidgetItem(str(nodes[i].points[3])))
+            self.ui.tablaResultados.setItem(row, 4, QTableWidgetItem(self.data["class"][i]))
+            self.ui.tablaResultados.setItem(row, 5, QTableWidgetItem("C{}".format(nodes[i].centroid_id)))
+            row += 1
